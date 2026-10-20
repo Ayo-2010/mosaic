@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mosaic — Bento Layout Studio</title>
+<meta name="description" content="A drag-and-drop bento layout builder with responsive previews, block inspector, undo and export to standalone HTML.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <div class="brand">
+      <span class="mark"><i></i><i></i><i></i></span>
+      <div>
+        <strong>Mosaic</strong>
+        <small>Bento layout studio</small>
+      </div>
+    </div>
+    <div class="top-actions">
+      <button id="undo" class="icon-button" type="button" aria-label="Undo" disabled>↶</button>
+      <button id="redo" class="icon-button" type="button" aria-label="Redo" disabled>↷</button>
+      <button id="copy-json" class="ghost" type="button">Copy JSON</button>
+      <button id="export" class="primary" type="button">Export HTML</button>
+    </div>
+  </header>
+
+  <main class="workspace">
+    <aside class="library">
+      <div class="panel-head"><span>Library</span><span>06</span></div>
+      <div class="add-grid" id="add-grid"></div>
+      <div class="panel-head spaced"><span>Starter layouts</span><span>03</span></div>
+      <div class="presets" id="presets"></div>
+      <div class="panel-head spaced"><span>Canvas</span><span>Setup</span></div>
+      <label class="setting">Columns
+        <select id="columns">
+          <option value="8">8 columns</option>
+          <option value="12" selected>12 columns</option>
+        </select>
+      </label>
+      <label class="setting">Gap <output id="gap-output">10px</output>
+        <input type="range" id="gap" min="4" max="24" value="10">
+      </label>
+      <label class="setting">Surface
+        <select id="surface">
+          <option value="paper">Warm paper</option>
+          <option value="white">White studio</option>
+          <option value="ink">Ink</option>
+        </select>
+      </label>
+      <label class="check"><input type="checkbox" id="grid-lines"> Show grid guides</label>
+      <div class="library-note">Click a block to add it, drag to reorder, and edit the content in the inspector.</div>
+    </aside>
+
+    <section class="stage">
+      <div class="stage-head">
+        <div>
+          <span class="eyebrow">Composition</span>
+          <span class="stage-title" id="stage-title">Untitled layout</span>
+        </div>
+        <div class="stage-tools">
+          <div class="segmented" id="mode">
+            <button data-mode="desktop" class="active" type="button" title="Desktop">▭</button>
+            <button data-mode="tablet" type="button" title="Tablet">▯</button>
+            <button data-mode="mobile" type="button" title="Mobile">▯</button>
+          </div>
+          <button id="clear" class="ghost small" type="button">Clear</button>
+        </div>
+      </div>
+      <div class="canvas-shell" id="canvas-shell">
+        <div class="canvas" id="canvas"></div>
+        <div class="canvas-empty" id="canvas-empty" hidden>
+          <span>＋</span>
+          <h2>Start with a block.</h2>
+          <p>Choose a block from the library to build your first composition.</p>
+        </div>
+      </div>
+      <div class="stage-foot">
+        <span id="block-count">0 blocks</span>
+        <span id="mode-label">Desktop · 12 columns</span>
+        <span>Drag blocks to reorder</span>
+      </div>
+    </section>
+
+    <aside class="inspector" id="inspector">
+      <div class="panel-head"><span>Inspector</span><span id="inspector-id">—</span></div>
+      <div id="inspector-body"></div>
+    </aside>
+  </main>
+
+  <footer>
+    <span>Mosaic / layout studio</span>
+    <span id="status">Saved locally</span>
+  </footer>
+</div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="app.js"></script>
+</body>
+</html>
